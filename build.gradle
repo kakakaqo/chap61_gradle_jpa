@@ -1,0 +1,65 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.12'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.javalab'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+/*
+	build.gradle 파일의 implementation은 해당 라이브러리 설치를 위해 
+	일반적으로 사용하는 설정이다. implementation은 해당 라이브러리가 
+	변경되더라도 이 라이브러리와 연관된 모든 모듈들을 컴파일하지 않고 직접 
+	관련이 있는 모듈들만 컴파일하기 때문에 rebuild 속도가 빠르다.
+*/
+dependencies {
+
+   
+	// 타임리프 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
+	// 롬복 의존성
+	compileOnly 'org.projectlombok:lombok'
+	// 데브툴스 의존성
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	// 마리아디비 의존성
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	// 롬복 어노테이션 의존성
+	annotationProcessor 'org.projectlombok:lombok'
+	// 테스트 관련 의존성
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+    // 테스트 관련 의존성
+	//testImplementation('org.springframework.boot:spring-boot-starter-test') {
+	//	exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	//}
+		
+	// 타임리프 레이아웃 관련 의존성
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' 
+	
+	// SQL 로그  	
+  	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+  	// JPA
+  	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  	
+	// JPA 구현체인 Hibernate를 사용하기 위한 의존성
+    implementation 'org.hibernate:hibernate-core:5.6.0.Final'
+    
+  	
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
